@@ -22,12 +22,17 @@ public class Body {
 
     public void Collide(Body b1){
         b1.exists = false;
-        Point i = new Point();
-        i.Add(b1.Velocity, b1.Mass);
-        i.Add(Velocity, Mass);
+        Point centerOfMass = new Point();
+        centerOfMass.Add(Position, Mass);
+        centerOfMass.Add(b1.Position, b1.Mass);
+        Point impulse = new Point();
+        impulse.Add(b1.Velocity, b1.Mass);
+        impulse.Add(Velocity, Mass);
         Mass += b1.Mass;
-        i.Multiply(1/(Mass));
-        Velocity = i;
+        centerOfMass.Multiply(1/(Mass));
+        impulse.Multiply(1/(Mass));
+        Position = centerOfMass;
+        Velocity = impulse;
     }
 
     public static void ApplyFg(Body b1, Body b2){

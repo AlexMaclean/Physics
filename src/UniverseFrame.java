@@ -23,9 +23,7 @@ public class UniverseFrame extends JPanel {
 
         uWidth = windowHeight / RATIO;
         uHeight = windowWidth / RATIO;
-       // bodies.add(new Body(new Body.Point(0, 0),5.97 * Math.pow(10, 25)));
-      //  bodies.add(new Body( new Body.Point(0, 1.8 * Math.pow(10, 8)), 7.34 * Math.pow(10, 24)));
-        populateUniverse(100,2 * Math.pow(10, 26),2.0 * Math.pow(10, 10));
+        populateUniverse(200,2 * Math.pow(10, 26),2.0 * Math.pow(10, 9));
         _timer = new Timer(2, e -> paintInterval());
         _timer.start();
     }
