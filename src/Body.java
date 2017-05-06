@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * Project: Physics
  * Created by Alex on 5/3/2017.
@@ -8,6 +10,7 @@ public class Body {
     Point Fnet;
     double Mass;
     boolean exists;
+    Color color;
 
     private static final double G = 6.67 * Math.pow(10, -8);
     private static final double DENSITY = (Math.pow((6.37 * Math.pow(10, 6)), 3)) / (5.97 * Math.pow(10, 24));
@@ -18,6 +21,7 @@ public class Body {
         Fnet = new Point();
         Mass = mass;
         exists = true;
+        color = Color.WHITE;
     }
 
     public void Collide(Body b1){
@@ -33,6 +37,15 @@ public class Body {
         impulse.Multiply(1/(Mass));
         Position = centerOfMass;
         Velocity = impulse;
+        mixColor(b1);
+    }
+
+    private void mixColor(Body b1) {
+        double ratio = b1.Mass/Mass;
+        int r = (int) Math.round(b1.color.getRed()*ratio + color.getRed()*(1-ratio));
+        int g = (int) Math.round(b1.color.getGreen()*ratio + color.getGreen()*(1-ratio));
+        int b = (int) Math.round(b1.color.getBlue()*ratio + color.getBlue()*(1-ratio));
+        color = new Color(r, g, b);
     }
 
     public static void ApplyFg(Body b1, Body b2){

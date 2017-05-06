@@ -34,6 +34,7 @@ public class UniverseFrame extends JPanel {
             double x = Math.random() * uWidth - uWidth / 2;
             double y = Math.random() * uHeight - uHeight / 2;
             Body b = new Body(new Body.Point(x, y), mass);
+            b.color = new Color((int)(Math.random()*(255*255*255)));
             this.bodies.add(b);
         }
     }
@@ -59,7 +60,6 @@ public class UniverseFrame extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHints(rh);
-        g2d.setColor(Color.cyan);
         for (Body b : bodies) {
             drawBody(b, g2d);
         }
@@ -69,6 +69,7 @@ public class UniverseFrame extends JPanel {
         int wx = toPixels(b.Position.x) + windowWidth / 2;
         int wy = toPixels(b.Position.y) + windowHeight / 2;
         int wRadius =  toPixels(b.getRadius());
+        g2d.setColor(b.color);
         g2d.fillOval(wx-wRadius, wy-wRadius, wRadius*2, wRadius*2);
     }
 
